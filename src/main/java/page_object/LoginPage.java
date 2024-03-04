@@ -50,8 +50,8 @@ public class LoginPage {
     }
 
     @Step("Заполнение поля \"Пароль\"")
-    public void setPasswordField(String email){
-        driver.findElement(passwordField).sendKeys(email);
+    public void setPasswordField(String passsword){
+        driver.findElement(passwordField).sendKeys(passsword);
     }
 
     @Step("Клик по кнопке \"Войти\"")
