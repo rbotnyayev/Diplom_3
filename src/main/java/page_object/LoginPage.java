@@ -1,6 +1,7 @@
 package page_object;
 
 import io.qameta.allure.Step;
+import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -9,6 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class LoginPage {
     WebDriver driver;
 
+    @Getter
     private final By centerTitle = By.xpath(".//main/div/h2[text()='Вход']");
 
     //Поле "Email"

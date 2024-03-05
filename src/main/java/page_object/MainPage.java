@@ -1,12 +1,15 @@
 package page_object;
 
 import io.qameta.allure.Step;
+import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import javax.annotation.processing.Generated;
 
 import static org.junit.Assert.assertEquals;
 public class MainPage {
@@ -38,19 +41,21 @@ public class MainPage {
     private final By activeTab = By.xpath("//div[starts-with(@class,'tab_tab__1SPyG tab_tab_type_current__2BEPc')]//span");
 
     //картинка с "Булкой" для проверки видимости раздела
-    public By bunsImg = By.xpath(".//img[@alt='Краторная булка N-200i']");
+    private final By bunsImg = By.xpath(".//img[@alt='Краторная булка N-200i']");
 
     //локатор текста заголовка "Булки" для реализации ожидания
-    public By bunsText = By.xpath(".//h2[text()='Булки']");
+    private final By bunsText = By.xpath(".//h2[text()='Булки']");
 
     //картинка с "Соусом" для реализации ожидания
-    public By saucesImg = By.xpath(".//p[text()='Соус с шипами Антарианского плоскоходца']");
+    private final By saucesImg = By.xpath(".//p[text()='Соус с шипами Антарианского плоскоходца']");
 
     //картинка с "Начинкой" для реализации ожидания
-    public By fillingsImg = By.xpath(".//img[@alt='Плоды Фалленианского дерева']");
+    @Getter
+    private final By fillingsImg = By.xpath(".//img[@alt='Плоды Фалленианского дерева']");
 
     //локатор текста "Соберите бургер" для реализации ожидания
-    public By textBurgerMainPage = By.xpath(".//section/h1[text()='Соберите бургер']");
+    @Getter
+    private final By textBurgerMainPage = By.xpath(".//section/h1[text()='Соберите бургер']");
 
     public MainPage(WebDriver driver) {
         this.driver = driver;
@@ -64,7 +69,7 @@ public class MainPage {
 
     @Step("Ожидание загрузки страницы, document.readyState")
     public void waitDocReady() {
-        new WebDriverWait(driver, 15)
+        new WebDriverWait(driver, 10)
                 .until((ExpectedCondition<Boolean>) wd ->
                         ((JavascriptExecutor) wd)
                                 .executeScript("return document.readyState")
@@ -72,7 +77,7 @@ public class MainPage {
     }
     @Step("Ожидание загрузки страницы полностью, анимация исчезает")
     public void waitForFullPageLoading() {
-        new WebDriverWait(driver, 10)
+        new WebDriverWait(driver, 5)
                 .until(ExpectedConditions.invisibilityOfElementLocated
                         (By.xpath(".//img[@src='./static/media/loading.89540200.svg' and @alt='loading animation']")));
         waitDocReady();
@@ -80,15 +85,15 @@ public class MainPage {
 
     @Step("Ожидание загрузки текста и картинки с булкой на главной странице")
     public void waitForLoadBunsHeader() {
-        new WebDriverWait(driver, 10)
+        new WebDriverWait(driver, 5)
                 .until(ExpectedConditions.visibilityOfElementLocated(bunsImg));
-        new WebDriverWait(driver, 10)
+        new WebDriverWait(driver, 5)
                 .until(ExpectedConditions.visibilityOfElementLocated(bunsText));
     }
 
     @Step("Ожидание загрузки картинки с соусом на главной странице")
     public void waitForLoadSaucesHeader() {
-        new WebDriverWait(driver, 10)
+        new WebDriverWait(driver, 5)
                 .until(ExpectedConditions.visibilityOfElementLocated(saucesImg));
     }
 
@@ -125,24 +130,24 @@ public class MainPage {
     }
 
     @Step("Клик по кнопке \"Булки\"")
-    public void clickOnBunsButton(){
+    public void clickOnBunsButton() throws InterruptedException{
         driver.findElement(bunsButton).click();
         waitForFullPageLoading();
     }
 
     @Step("Клик по кнопке \"Соусы\"")
-    public void clickOnSaucesButton(){
+    public void clickOnSaucesButton() throws InterruptedException{
         driver.findElement(saucesButton).click();
         waitForFullPageLoading();
     }
 
     @Step("Клик по кнопке \"Начинки\"")
-    public void clickOnFillingsButton(){
+    public void clickOnFillingsButton() throws InterruptedException{
         driver.findElement(fillingsButton).click();
         waitForFullPageLoading();
     }
 
-    public void checkTextBun() {
+    public void checkTextBun() throws InterruptedException{
         String countActivity = driver.findElement(activeTab).getText();
         assertEquals("Булки", countActivity);
     }
