@@ -33,7 +33,7 @@ public class MainRule {
     public void setUpYandexBrowser() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--remote-allow-origins=*");
-        System.setProperty("webdriver.chrome.driver", "src/main/resources/yandexdriver");
+        System.setProperty("webdriver.chrome.driver", "C:/WebDriver/bin/yandexdriver.exe");
         driver = new ChromeDriver(options);
     }
 

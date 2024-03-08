@@ -9,6 +9,8 @@ import page_object.LoginPage;
 import page_object.MainPage;
 import page_object.RegisterPage;
 
+import static org.junit.Assert.assertTrue;
+
 
 public class RegistrationTest extends MainRule {
     private String accessToken;
@@ -49,7 +51,7 @@ public class RegistrationTest extends MainRule {
         registerPage.waitForLoadRegisterPage();
         registerPage.register(user.getName(), user.getEmail(), "ggg");
         //Проверка появление текста "Некорректный пароль"
-        Assert.assertTrue("Текст об ошибке отсутствует", driver.findElement(registerPage.errorPasswordText).isDisplayed());
+        assertTrue("Текст об ошибке отсутствует", driver.findElement(registerPage.errorPasswordText).isDisplayed());
     }
 
     @After
