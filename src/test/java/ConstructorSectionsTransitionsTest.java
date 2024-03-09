@@ -1,14 +1,20 @@
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
+import model.UserSteps;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.WebDriver;
 import page_object.MainPage;
 
-public class ConstructorSectionsTransitionsTest extends MainRule {
+public class ConstructorSectionsTransitionsTest {
 
     MainPage mainPage;
+    WebDriver driver;
+    Browser browser = new Browser();
     @Before
     public void setUp() {
+        driver = browser.getWebDriver();
         mainPage = new MainPage(driver);
     }
 
@@ -35,5 +41,10 @@ public class ConstructorSectionsTransitionsTest extends MainRule {
     public void transitionToFillingsInConstructorTest() throws InterruptedException {
         mainPage.clickOnFillingsButton();
         mainPage.checkTextFillings();
+    }
+
+    @After
+    public void cleanUp() {
+            driver.quit();
     }
 }

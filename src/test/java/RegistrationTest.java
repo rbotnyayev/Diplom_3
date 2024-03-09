@@ -3,6 +3,7 @@ import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import model.UserSteps;
 import org.junit.*;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.html5.LocalStorage;
 import org.openqa.selenium.html5.WebStorage;
 import page_object.LoginPage;
@@ -12,15 +13,18 @@ import page_object.RegisterPage;
 import static org.junit.Assert.assertTrue;
 
 
-public class RegistrationTest extends MainRule {
+public class RegistrationTest {
     private String accessToken;
     private User user;
     MainPage mainPage;
     LoginPage loginPage;
     RegisterPage registerPage;
+    WebDriver driver;
+    Browser browser = new Browser();
 
     @Before
     public void setUp() {
+        driver = browser.getWebDriver();
         mainPage = new MainPage(driver);
         loginPage = new LoginPage(driver);
         registerPage = new RegisterPage(driver);
@@ -59,5 +63,6 @@ public class RegistrationTest extends MainRule {
         if (accessToken != null) {
             UserSteps.deleteUser(accessToken);
         }
+        driver.quit();
     }
 }

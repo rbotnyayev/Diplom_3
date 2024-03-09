@@ -3,21 +3,25 @@ import model.UserSteps;
 import io.qameta.allure.Description;
 import io.qameta.allure.junit4.DisplayName;
 import org.junit.*;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.html5.LocalStorage;
 import org.openqa.selenium.html5.WebStorage;
 import page_object.*;
 
-public class JumpToPersonalAccountTest extends MainRule {
+public class JumpToPersonalAccountTest  {
     static MainPage mainPage;
     static LoginPage loginPage;
     static RegisterPage registerPage;
     ProfilePage profilePage;
     private static String accessToken;
     private User user;
+    WebDriver driver;
+    Browser browser = new Browser();
 
 
     @Before
     public void setUp() {
+        driver = browser.getWebDriver();
         mainPage = new MainPage(driver);
         loginPage = new LoginPage(driver);
         registerPage = new RegisterPage(driver);
@@ -84,5 +88,6 @@ public class JumpToPersonalAccountTest extends MainRule {
         if (accessToken != null) {
             UserSteps.deleteUser(accessToken);
         }
+        driver.quit();
     }
 }
